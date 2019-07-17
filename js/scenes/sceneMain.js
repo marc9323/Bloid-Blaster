@@ -106,6 +106,7 @@ class SceneMain extends Phaser.Scene {
     scrollBackground() {
         console.log(this.backgroundScrollSpeed);
         this.background.x -= this.backgroundScrollSpeed;
+        // image is 1536 width... but > -1055 results in a black gap
         if (this.background.x < -1055) {
             console.log(this.background.x);
             this.background.x = 0;
