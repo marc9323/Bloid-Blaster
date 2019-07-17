@@ -34,7 +34,7 @@ class SceneLoad extends Phaser.Scene {
         // pink, red, orange, yellow, green, blue, purple
 
         // load simple colored blocks
-        for (var i = 1; i < 7; i++) {
+        for (var i = 1; i <= 7; i++) {
             this.load.image(
                 `block-${i}`,
                 `images/blocks/Blocks_01_64x64_Alt_00_00${i}.png`
@@ -42,7 +42,7 @@ class SceneLoad extends Phaser.Scene {
         }
 
         // load black eyed colored blocks
-        for (var i = 1; i < 7; i++) {
+        for (var i = 1; i <= 7; i++) {
             this.load.image(
                 `blackeye-block-${i}`,
                 `images/blocks/Blocks_01_64x64_Alt_01_00${i}.png`
@@ -50,7 +50,7 @@ class SceneLoad extends Phaser.Scene {
         }
 
         // load blue eyed colored blocks
-        for (var i = 1; i < 7; i++) {
+        for (var i = 1; i <= 7; i++) {
             this.load.image(
                 `blueeye-block-${i}`,
                 `images/blocks/Blocks_01_64x64_Alt_02_00${i}.png`

@@ -12,16 +12,6 @@ class SceneMain extends Phaser.Scene {
 
         // var sb = new SoundButtons({ scene: this });
 
-        // var toggleButton = new ToggleButton({
-        //     scene: this,
-        //     backKey: 'toggleBack',
-        //     onIcon: 'sfxOn',
-        //     offIcon: 'sfxOff',
-        //     event: 'G.TOGGLE_SOUND',
-        //     x: 200,
-        //     y: 200
-        // });
-
         // create cannon bob animation
 
         this.backgroundScrollSpeed = 5;
@@ -59,6 +49,7 @@ class SceneMain extends Phaser.Scene {
         });
 
         this.bobGroup = this.physics.add.group();
+        // this.bloidGroup = this.physics.add.group();
 
         //this.bobChar.play('fire');
 
@@ -78,11 +69,38 @@ class SceneMain extends Phaser.Scene {
         this.overlay.setInteractive();
         this.overlay.on('pointerdown', this.onPointerDown, this);
 
-        this.block = this.physics.add.sprite(
-            600,
-            this.centerY,
-            'blackeye-block-1'
-        );
+        // temp bloid code
+        // this.block = this.physics.add.sprite(
+        //     600,
+        //     this.centerY,
+        //     'blackeye-block-1'
+        // );
+        // this.bloidGroup.add(this.block);
+
+        // this.setColliders();
+
+        this.bloids = new Bloids({
+            scene: this,
+            numBloids: 3,
+            rowX: game.config.width / 2,
+            rowY: game.config.height / 2
+        });
+    }
+
+    // setColliders() {
+    //     // between bob and bloid
+    //     this.physics.add.collider(
+    //         this.bobGroup,
+    //         this.block,
+    //         this.bobHitBlock,
+    //         null,
+    //         this
+    //     );
+    // }
+
+    bobHitBlock(block, bob) {
+        block.destroy();
+        bob.destroy();
     }
 
     scrollBackground() {
@@ -109,12 +127,12 @@ class SceneMain extends Phaser.Scene {
         return angle * (180 / Math.PI);
     }
 
-    moveBlock() {
-        this.block.x--;
-        if (this.block.x < -this.block.x.width) {
-            this.block.destroy();
-        }
-    }
+    // moveBlock() {
+    //     this.block.x--;
+    //     if (this.block.x < -this.block.x.width) {
+    //         this.block.destroy();
+    //     }
+    // }
 
     fireBob() {
         this.bob = this.physics.add.sprite(
@@ -125,19 +143,13 @@ class SceneMain extends Phaser.Scene {
         this.bobGroup.add(this.bob);
         Align.scaleToGameW(this.bob, 0.025);
         this.bob.play('fire');
-    }
 
-    updateBob() {
-        if (this.bob) {
-            this.bob.body.setVelocity(350, 0);
-            //this.bobGroup.add(this.bob);
-        }
+        this.bob.body.setVelocity(350, 0);
     }
 
     update() {
         //constant running loop
         this.scrollBackground();
-        this.moveBlock();
-        this.updateBob();
+        //this.moveBlock();
     }
 }
